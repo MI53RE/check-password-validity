@@ -21,8 +21,8 @@ const minimumPasswordLength = 8; // default value
 const minimumRulesMatching = 3; // default value
 
 if (checkPasswordValidity(password, minimumPasswordLength, minimumRulesMatching)) {
-  console.log('the password is valid !);
+  console.log('the password is valid !');
 } else {
-  console.log('the password is not valid !);
+  console.log('the password is not valid !');
 }
 ```
