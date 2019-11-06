@@ -1,3 +1,9 @@
+const REGEX_PASSWORD_RULES = [
+  /[0-9]+/, // valid if string containing at least 1 numeric char
+  /[a-z]+/, // valid if string containing at least 1 lower alphabetic char
+  /[A-Z]+/, // valid if string containing at least 1 upper alphabetic char
+  /[\W_]+/ // valid if string containing at least 1 non alphanumeric char
+];
 /**
  * @param {string} password the password to be tested
  * @param {number} minimumPasswordLength an integer being the minimum number of char the password must be (default is 8)
@@ -17,12 +23,6 @@ const checkPasswordValidity = (password, minimumPasswordLength, minimumRulesMatc
     if (!isNaN(minimumRulesMatching) && minimumRulesMatching !== parseInt(minimumRulesMatching, 10)) {
       throw new Error(`MinimumRulesMatching must be a integer, ${typeof minimumRulesMatching} provided instead`)
     }
-    const REGEX_PASSWORD_RULES = [
-      /[0-9]+/, // valid if string containing at least 1 numeric char
-      /[a-z]+/, // valid if string containing at least 1 lower alphabetic char
-      /[A-Z]+/, // valid if string containing at least 1 upper alphabetic char
-      /[\W_]+/ // valid if string containing at least 1 non alphanumeric char
-    ];
     if (password.split('').length >= minimumPasswordLength) {
       return REGEX_PASSWORD_RULES.filter(regex => regex.test(password)).length >= minimumRulesMatching;
     }
