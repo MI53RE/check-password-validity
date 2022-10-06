@@ -7,7 +7,7 @@ const REGEX_PASSWORD_RULES = [
 /**
  * @param {string} password the password to be tested
  * @param {number} minimumPasswordLength an integer being the minimum number of char the password must be (default is 8)
- * @param {number} minimumRulesMatching an integer being the minimum number of rules the password must matches to be valid (default is 3)
+ * @param {number} minimumRulesMatching an integer between 0 (deactivate checker) to 4 (max rules number) being the minimum number of rules the password must matches to be valid (default is 3)
  * @returns {boolean}
  */
 const checkPasswordValidity = (password, minimumPasswordLength, minimumRulesMatching) => {
@@ -22,6 +22,9 @@ const checkPasswordValidity = (password, minimumPasswordLength, minimumRulesMatc
     }
     if (!isNaN(minimumRulesMatching) && minimumRulesMatching !== parseInt(minimumRulesMatching, 10)) {
       throw new Error(`MinimumRulesMatching must be a integer, ${typeof minimumRulesMatching} provided instead`)
+    }
+    if (minimumRulesMatching >= 0 && minimumRulesMatching <= 4) {
+      throw new Error(`MinimumRulesMatching must be a integer from 1 to 4, ${minimumRulesMatching} provided instead`)
     }
     if (password.split('').length >= minimumPasswordLength) {
       return REGEX_PASSWORD_RULES.filter(regex => regex.test(password)).length >= minimumRulesMatching;
